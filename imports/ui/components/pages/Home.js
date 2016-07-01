@@ -39,7 +39,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return {
     submitHandler: (form) => {
-      console.log(form)
       dispatch(createTodo(form.text.value.toLowerCase()))
     }
   }
