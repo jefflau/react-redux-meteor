@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 
-import SubscribeComponent from '../helpers/SubscribeComponent';
 import Todos from '../../../api/collections/todos';
 import AddTodoForm from '../AddTodoForm';
-import  { createTodo } from '../../actions/actions';
+import  { createTodo, getAllTodos } from '../../actions/actions';
 
 class Home extends Component {
   componentWillMount() {
-    this.props.subscribe('allTodos');
+    //this.props.subscribe('allTodos');
+    console.log(this.props);
+    this.props.getAllTodos();
   }
   render(){
     let { form, submitHandler, serverError, todos } = this.props;
@@ -40,8 +41,11 @@ function mapDispatchToProps(dispatch){
   return {
     submitHandler: (form) => {
       dispatch(createTodo(form.text.value.toLowerCase()))
+    },
+    getAllTodos: () => {
+      dispatch(getAllTodos())
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribeComponent(Home));
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -11,5 +11,11 @@ Meteor.methods({
     }
 
     return createTodo(text);
+  },
+  getAllTodos(){
+    if (this.isSimulation) {
+      return false;
+    }
+    return Todos.find().fetch()
   }
 });
